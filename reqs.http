@@ -1,6 +1,6 @@
 @server = http://localhost:8080
 
-@emp = {{server}}/api/employees
+@emp = {{server}}/api/instrumentos
 ###
 
 GET {{emp}}
@@ -9,8 +9,8 @@ POST {{emp}}
 Content-Type: application/json
 
 {
-    "firstName": "Bilbo",
-    "lastName": "Baggins",
-    "description": "burglar"
+    "nombre": "Quena",
+    "categoria": "Viento",
+    "descripcion": "Tubo de madera con orificios"
 }
 ###
