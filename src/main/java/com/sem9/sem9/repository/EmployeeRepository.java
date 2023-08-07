@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.sem9.sem9.entity.Employee;
 
-//@RepositoryRestResource(collectionResourceRel = "empleados", path = "emps")
+//@RepositoryRestResource(collectionResourceRel = "empleados", path = "empleados")
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
 }

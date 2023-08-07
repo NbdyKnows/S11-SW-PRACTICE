@@ -34105,7 +34105,8 @@ var App = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, App);
     _this = _super.call(this, props);
     _this.state = {
-      instrumentos: []
+      instrumentos: [],
+      employees: []
     };
     return _this;
   }
@@ -34121,13 +34122,23 @@ var App = /*#__PURE__*/function (_React$Component) {
           instrumentos: response.entity._embedded.instrumentos
         });
       });
+      client({
+        method: "GET",
+        path: "/api/employees"
+      }).done(function (response) {
+        _this2.setState({
+          employees: response.entity._embedded.employees
+        });
+      });
     }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement(InstrumentoList, {
+      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h2", null, "Vendedores"), /*#__PURE__*/React.createElement(EmployeeList, {
+        employees: this.state.employees
+      }), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement("h2", null, "Instrumentos"), /*#__PURE__*/React.createElement(InstrumentoList, {
         instrumentos: this.state.instrumentos
-      });
+      }));
     }
   }]);
   return App;
@@ -34153,12 +34164,33 @@ var InstrumentoList = /*#__PURE__*/function (_React$Component2) {
   }]);
   return InstrumentoList;
 }(React.Component);
-var Instrumento = /*#__PURE__*/function (_React$Component3) {
-  _inherits(Instrumento, _React$Component3);
-  var _super3 = _createSuper(Instrumento);
+var EmployeeList = /*#__PURE__*/function (_React$Component3) {
+  _inherits(EmployeeList, _React$Component3);
+  var _super3 = _createSuper(EmployeeList);
+  function EmployeeList() {
+    _classCallCheck(this, EmployeeList);
+    return _super3.apply(this, arguments);
+  }
+  _createClass(EmployeeList, [{
+    key: "render",
+    value: function render() {
+      var employees = this.props.employees.map(function (employee) {
+        return /*#__PURE__*/React.createElement(Employee, {
+          key: employee._links.self.href,
+          employee: employee
+        });
+      });
+      return /*#__PURE__*/React.createElement("table", null, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "First Name"), /*#__PURE__*/React.createElement("th", null, "Last Name"), /*#__PURE__*/React.createElement("th", null, "Description")), employees));
+    }
+  }]);
+  return EmployeeList;
+}(React.Component);
+var Instrumento = /*#__PURE__*/function (_React$Component4) {
+  _inherits(Instrumento, _React$Component4);
+  var _super4 = _createSuper(Instrumento);
   function Instrumento() {
     _classCallCheck(this, Instrumento);
-    return _super3.apply(this, arguments);
+    return _super4.apply(this, arguments);
   }
   _createClass(Instrumento, [{
     key: "render",
@@ -34167,6 +34199,21 @@ var Instrumento = /*#__PURE__*/function (_React$Component3) {
     }
   }]);
   return Instrumento;
+}(React.Component);
+var Employee = /*#__PURE__*/function (_React$Component5) {
+  _inherits(Employee, _React$Component5);
+  var _super5 = _createSuper(Employee);
+  function Employee() {
+    _classCallCheck(this, Employee);
+    return _super5.apply(this, arguments);
+  }
+  _createClass(Employee, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, this.props.employee.firstName), /*#__PURE__*/React.createElement("td", null, this.props.employee.lastName), /*#__PURE__*/React.createElement("td", null, this.props.employee.description));
+    }
+  }]);
+  return Employee;
 }(React.Component);
 ReactDOM.render( /*#__PURE__*/React.createElement(App, null), document.getElementById("react"));
 
